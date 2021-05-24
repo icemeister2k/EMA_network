@@ -361,7 +361,8 @@ def buildNetwork(dat_filtered):
                        })
     edges=edges.iloc[:,0:8]
     #filter edges by candidates in range of calculated BIA and empiric BIA +- 10%
-    edges=edges[(edges["calculated PBIA"] < (edges["value"]*1.1))&(edges["calculated PBIA"] > (edges["value"]*0.9))] #10 %
+    edges=edges[(edges["calculated PBIA"] < (edges["value"]*1.1))&(edges["calculated PBIA"] > (edges["value"]*0.9))] 
+    edges=edges[edges["value"]>0.05]#pBIA mind 5%
     
     nodes=pd.DataFrame({'id': node_id,'value': node_pA ,'label': node_name,'title': ["P(A): " + str(i*100)[0:5]+"%" for i in node_pA]})
     nodes
