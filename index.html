@@ -10,7 +10,7 @@
     <style>
         html,
         body {
-            font: 20px arial;
+            font: 15px arial;
             padding-left: 5%;
             padding-right: 5%;
         }
@@ -69,13 +69,13 @@
         }
 
         #big {
-            font-size: 25px;
+            font-size: 20px;
             font-weight: bold;
             font-family: arial;
         }
 
         #small {
-            font-size: 25px;
+            font-size: 15px;
             font-family: arial;
             /* font-weight: bold; */
         }
@@ -85,7 +85,7 @@
         }
 
         p {
-            font-size: 25px;
+            font-size: 15px;
             font-family: arial;
         }
 
@@ -243,6 +243,20 @@
     </style>
     <script>
 
+        function destChart() {
+            // remove chartcontainer wenn es existiert
+            if (document.querySelector('#chartContainer') !== null) {
+                var dest = document.querySelector('#chartContainer');
+                dest.parentNode.removeChild(dest);
+            }
+            // else create chartContainer
+            else {
+                var ch = document.createElement('div');
+                ch.id = "chartContainer";
+                var parent = document.querySelector('#chartparent');
+                parent.appendChild(ch);
+            }
+        }
 
         function overall() {
             document.getElementById("info").innerText = "Aktuelles Dataset: Alle schweren Nebenwirkungen in der European Economic Area";
@@ -252,6 +266,8 @@
                 var dest = document.querySelector('#img2');
                 dest.parentNode.removeChild(dest);
             }
+
+            destChart();
 
             fetch('https://raw.githubusercontent.com/icemeister2k/EMA_network/main/networkdata/network_all.json')
                 .then(response => response.json())
@@ -267,6 +283,8 @@
             document.getElementById("info").innerText = "Aktuelles Dataset: Kinder (0-17 Jahre)";
             document.getElementById("img").src = "https://raw.githubusercontent.com/icemeister2k/EMA_network/main/img/kids_overview.svg";
 
+            destChart();
+
             if (document.querySelector('#img2') !== null) {
                 var dest = document.querySelector('#img2');
                 dest.parentNode.removeChild(dest);
@@ -276,6 +294,7 @@
                 .then(response => response.json())
                 .then(data => { redrawAll(data[1], data[0]) });
 
+                
             var imgg = document.createElement('img');
             imgg.src = "https://raw.githubusercontent.com/icemeister2k/EMA_network/main/img/kids_pie.svg";
             imgg.id = "img2";
@@ -286,6 +305,7 @@
             document.getElementById("info").innerText = "Aktuelles Dataset: Astra se neca";
             document.getElementById("img").src = "https://raw.githubusercontent.com/icemeister2k/EMA_network/main/img/astra.svg";
 
+            destChart();
             if (document.querySelector('#img2') !== null) {
                 var dest = document.querySelector('#img2');
                 dest.parentNode.removeChild(dest);
@@ -299,6 +319,7 @@
             document.getElementById("info").innerText = "Aktuelles Dataset: Pfizer";
             document.getElementById("img").src = "https://raw.githubusercontent.com/icemeister2k/EMA_network/main/img/pfizer.svg";
 
+            destChart();
             if (document.querySelector('#img2') !== null) {
                 var dest = document.querySelector('#img2');
                 dest.parentNode.removeChild(dest);
@@ -312,6 +333,7 @@
             document.getElementById("info").innerText = "Aktuelles Dataset: Moderna";
             document.getElementById("img").src = "https://raw.githubusercontent.com/icemeister2k/EMA_network/main/img/moderna.svg";
 
+            destChart();
             if (document.querySelector('#img2') !== null) {
                 var dest = document.querySelector('#img2');
                 dest.parentNode.removeChild(dest);
@@ -325,6 +347,7 @@
             document.getElementById("info").innerText = "Aktuelles Dataset: j&j";
             document.getElementById("img").src = "https://raw.githubusercontent.com/icemeister2k/EMA_network/main/img/jj.svg";
 
+            destChart();
             if (document.querySelector('#img2') !== null) {
                 var dest = document.querySelector('#img2');
                 dest.parentNode.removeChild(dest);
@@ -338,7 +361,7 @@
         }
 
         function drawBars(to, fr, title) {
-
+            destChart();
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 title: {
@@ -532,6 +555,7 @@
                         tit = connectednodes_df[0].to;
                     }
 
+
                     drawBars(tos, fr, tit);
 
                     for (i = 0; i < connectedNodes.length; i++) {
@@ -570,7 +594,11 @@
         window.onload = function () {
             fetch('https://raw.githubusercontent.com/icemeister2k/EMA_network/main/networkdata/network_all.json')
                 .then(response => response.json())
-                .then(data => redrawAll(data[1], data[0]));
+                .then(data => {
+                    ////
+                    redrawAll(data[1], data[0])
+                });
+
         }
     </script>
 </head>
@@ -589,7 +617,10 @@
     <h2 id="info">Aktuelles Dataset: European Economic Area</h2>
     <p id="small">Auf nodes klicken für mehr Infos</p>
     <div id="mynetwork"></div>
-    <div id="chartContainer" style="height: 300px; width: 95%"></div>
+    <div id="chartparent">
+        <div id="chartContainer" style="height: 300px; width: 95%"></div>
+    </div>
+    
     <hr>
     <h1>2. Plots</h1>
     <div id="img1"><img id="img"
@@ -611,7 +642,7 @@
         Symptoms P(A).
         <br><br>4. die Verbindungen zwischen den nodes (edges) wurden berechnet indem das ursprüngliche gefilterte Set
         erst nach dem jeweiligen Symptom (Top100) gefiltert wurde und daraus wurde nach dem gleichzeitigen Vorhandensein
-        der 99 übrigen Symptome das jeweilige conditional probability P(B|A) berechnet. Wenn p(B|A) größer als 10% war
+        der 99 übrigen Symptome das jeweilige conditional probability P(B|A) berechnet. Wenn p(B|A) größer als 5% war
         wurde die jeweilige Verbindung in das resultierende network integriert.
     </p>
 
