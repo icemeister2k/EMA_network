@@ -662,8 +662,7 @@
         Symptoms P(A).
         <br><br>4. die Verbindungen zwischen den nodes (edges) wurden berechnet indem das ursprüngliche gefilterte Set
         erst nach dem jeweiligen Symptom (Top100) gefiltert wurde und daraus wurde nach dem gleichzeitigen Vorhandensein
-        der 99 übrigen Symptome das jeweilige conditional probability P(B|A) berechnet. Wenn p(B|A) größer als 5% war
-        wurde die jeweilige Verbindung in das resultierende network integriert.
+        der 99 übrigen Symptome das jeweilige conditional probability P(B|A) berechnet.<br><br>5. Wenn p(B|A) != p(B)+-5% und wenn p(B|A) größer als 5% war wurde die p(B|A) als abhängige Wahrscheinlichkeit in das network integriert.
     </p>
 
 
