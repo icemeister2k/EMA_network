@@ -249,8 +249,11 @@
                 var dest = document.querySelector('#chartContainer');
                 dest.parentNode.removeChild(dest);
             }
-            // else create chartContainer
-            else {
+        }
+
+        function createChart() {
+            // create chartContainer if not exists
+            if(document.querySelector('#chartContainer') === null) {
                 var ch = document.createElement('div');
                 ch.id = "chartContainer";
                 var parent = document.querySelector('#chartparent');
@@ -294,7 +297,7 @@
                 .then(response => response.json())
                 .then(data => { redrawAll(data[1], data[0]) });
 
-                
+
             var imgg = document.createElement('img');
             imgg.src = "https://raw.githubusercontent.com/icemeister2k/EMA_network/main/img/kids_pie.svg";
             imgg.id = "img2";
@@ -361,7 +364,7 @@
         }
 
         function drawBars(to, fr, title) {
-            
+            createChart();
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 title: {
@@ -555,7 +558,7 @@
                         tit = connectednodes_df[0].to;
                     }
 
-                    destChart();
+                    createChart();
                     drawBars(tos, fr, tit);
 
                     for (i = 0; i < connectedNodes.length; i++) {
@@ -595,7 +598,7 @@
             fetch('https://raw.githubusercontent.com/icemeister2k/EMA_network/main/networkdata/network_all.json')
                 .then(response => response.json())
                 .then(data => {
-                    ////
+                    destChart();
                     redrawAll(data[1], data[0])
                 });
 
@@ -620,7 +623,7 @@
     <div id="chartparent">
         <div id="chartContainer" style="height: 300px; width: 95%"></div>
     </div>
-    
+
     <hr>
     <h1>2. Plots</h1>
     <div id="img1"><img id="img"
