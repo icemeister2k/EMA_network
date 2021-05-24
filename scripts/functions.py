@@ -286,7 +286,7 @@ def buildNetwork(dat_filtered):
     #p(B u A) = p(A u B)
     #--> p(B u A) = p(B|A)*p(A) = p(A|B)*p(B)
     # if dependent events: P(B|A) = P(A u B) / P(A)
-    # if independent events: P(B|A) = P(B)
+    # if independent events: P(B|A) = P(B) & p(AIB) = p(A)
     edge1=[]
     edge2=[]
     edge_to=[]
@@ -347,7 +347,9 @@ def buildNetwork(dat_filtered):
                 #calculate pAuB
                 pAuB = pAIB*pB
                 edge_pAuB.append(pAuB)
+                #copy node pA to edge dataset
                 
+                edge_pA.append(pA)
                 #if dependent events: P(B|A) = P(A u B)/P(A)
                 edge_check.append(pAuB/pA)
 
@@ -357,14 +359,15 @@ def buildNetwork(dat_filtered):
                         "title":["P(B|A): " + str(round(i *100,2))+ "%" for i in edge_pBIA],
                         "fnode":edge_from,"tnode":edge_to,
                         "pB": edge_pB,"calculated PBIA": edge_check,
-                       "p(A|B)":edge_pAIB,"p(B|A)":edge_pBIA,"p(BuA)":edge_pBuA,"p(AuB)":edge_pAuB
+                       "p(A|B)":edge_pAIB,"p(B|A)":edge_pBIA,"p(BuA)":edge_pBuA,"p(AuB)":edge_pAuB,
+                        "p(A)":edge_pA
                        })
-    edges=edges.iloc[:,0:8]
-    #filter edges by candidates in range of calculated BIA != pB +- 5%
-    edges=edges[(edges["value"] > (edges["pB"]*1.05))|(edges["value"] < (edges["pB"]*0.95))] 
+    
+    #filter edges by candidates in range of calculated BIA != pB +- 5% & AIB != pA +- 5%
+    edges=edges[((edges["value"] > (edges["pB"]*1.05))|(edges["value"] < (edges["pB"]*0.95)))&((edges["p(A|B)"] > (edges["p(A)"]*1.05))|(edges["p(A|B)"] < (edges["p(A)"]*0.95)))] 
     #edges=edges[edges["calculated PBIA"] != edges["pB"]] 
     edges=edges[edges["value"]>0.1]#pBIA mind 10%
-    
+    edges=edges.iloc[:,0:8]
     nodes=pd.DataFrame({'id': node_id,'value': node_pA ,'label': node_name,'title': ["P(A): " + str(i*100)[0:5]+"%" for i in node_pA]})
     nodes
 
