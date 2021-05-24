@@ -1,4 +1,6 @@
 # EMA_network
 conditional probability network
 
-zur Navigation: <a href="https://htmlpreview.github.io/?https://github.com/icemeister2k/EMA_network/blob/main/Navigation.html" target="_blank">---> LINK <---</a>
+zur Navigation: <a href="https://raw.githack.com/icemeister2k/icemeister2k.github.io/main/index.html" target="_blank">---> LINK <---</a>
+
+ 
