@@ -248,7 +248,7 @@
             if (document.querySelector('#chartContainer') !== null) {
                 var dest = document.querySelector('#chartContainer');
                 dest.parentNode.removeChild(dest);
-                // plot nach oben rücken
+                // plot nach oben rücken, space entfernen
                 var space = document.querySelector('#space');
                 space.innerHTML ="";
             }
@@ -261,7 +261,7 @@
                 ch.id = "chartContainer";
                 var parent = document.querySelector('#chartparent');
                 parent.appendChild(ch);
-                // plots nach unten rücken
+                // plots nach unten rücken, space hinzufügen
                 var space = document.querySelector('#space');
                 space.innerHTML ="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
@@ -630,7 +630,7 @@
     <div id="chartparent">
         <div id="chartContainer" style="height: 300px; width: 95%"></div>
     </div>
-
+    <p id="space"></p>
     <hr>
     <h1>2. Plots</h1>
     <div id="img1"><img id="img"
