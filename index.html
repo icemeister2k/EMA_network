@@ -248,6 +248,9 @@
             if (document.querySelector('#chartContainer') !== null) {
                 var dest = document.querySelector('#chartContainer');
                 dest.parentNode.removeChild(dest);
+                // plot nach oben rücken
+                var space = document.querySelector('#space');
+                space.innerHTML ="";
             }
         }
 
@@ -258,6 +261,10 @@
                 ch.id = "chartContainer";
                 var parent = document.querySelector('#chartparent');
                 parent.appendChild(ch);
+                // plots nach unten rücken
+                var space = document.querySelector('#space');
+                space.innerHTML ="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+
             }
         }
 
@@ -637,7 +644,7 @@
             github repo</a><br><br>
         <b>Methoden:</b><br><br><b>network:</b><br>1. Dataset wurde erst nach Diagnose-keywords gefiltert
         (Hospitalization/Disabling/Death/Fatal), anschließend nach dem Alter (Kinder Dataset) bzw. nach Vakzin in
-        weitere Sets aufgeteilt<br><br>2. Aus dem gefilterten Set wurden einzigartige Diagnose-keywords extrahiert, das
+        weitere Sets aufgeteilt<br><br>2. Aus dem gefilterten Datenset wurden einzigartige Diagnose-keywords extrahiert, das
         Set nach den erhaltenen einzigartigen keywords aggregiert, das resultierende Set nach Häufigkeit pro Symptom
         sortiert und daraus die 100 häufigsten Symptome extrahiert.<br><br>3. Das ursprüngliche gefilterte Set wurde
         nach Häufigkeit der erhaltenen top100 Symptome gefiltert und daraus die jeweiligen Wahrscheinlichkeiten ( =P(A)
