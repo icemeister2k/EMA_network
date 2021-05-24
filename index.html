@@ -361,7 +361,7 @@
         }
 
         function drawBars(to, fr, title) {
-            destChart();
+            
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 title: {
@@ -555,7 +555,7 @@
                         tit = connectednodes_df[0].to;
                     }
 
-
+                    destChart();
                     drawBars(tos, fr, tit);
 
                     for (i = 0; i < connectedNodes.length; i++) {
